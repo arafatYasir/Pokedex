@@ -17,15 +17,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Eczar:wght@400..800&family=Grenze:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 :root {
-    --background-primary: white;
+    --background-primary: #030615;
     --background-secondary: '';
     --background-tertiary: #dbeafe;
     --background-accent: '';
     --background-compliment: '';
     --background-gradient: '';
-    --background-muted: #f8fafc;
+    --background-muted: #ffffff6f;
 
-    --color-primary: #030615;
+    --color-primary: #fff;
     --color-secondary: '';
     --color-tertiary: '';
     --color-accent: '';
