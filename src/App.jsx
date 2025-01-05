@@ -5,13 +5,13 @@ import { useState } from 'react'
 
 function App() {
 
-  const [selectedpokemon, setSelectedpokemon] = useState(0);
+  const [selectedPokemon, setSelectedpokemon] = useState(0);
 
   return (
     <>
       <Header />
-      <SideNav selectedpokemon={selectedpokemon} setSelectedpokemon={setSelectedpokemon} />
-      <PokeCard selectedpokemon={selectedpokemon} />
+      <SideNav selectedpokemon={selectedPokemon} setSelectedpokemon={setSelectedpokemon} />
+      <PokeCard selectedpokemon={selectedPokemon} />
     </>
   )
 }

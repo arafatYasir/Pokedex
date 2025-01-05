@@ -1,9 +1,9 @@
-import React from 'react';
+import { pokemonTypeColors } from "../utils";
 
-const TypeCard = () => {
+const TypeCard = ({type}) => {
     return (
-        <div>
-            
+        <div className="type-title" style={{color: pokemonTypeColors?.[type]?.color, background: pokemonTypeColors?.[type]?.background}}>
+            <p>{type}</p>
         </div>
     );
 };

@@ -1,9 +1,18 @@
 import { useEffect, useState } from "react";
 import { getFullPokedexNumber, getPokedexNumber } from "../utils";
+import TypeCard from "./TypeCard"
 
 const PokeCard = ({ selectedpokemon }) => {
     const [data, setData] = useState(null);
     const [loading, setLoading] = useState(false);
+
+    const {name, height, abilities, stats, types, moves, sprites} = data || {};
+
+    const imgList = Object.keys(sprites || {}).filter(val => {
+        if(!sprites[val]) {return false;}
+        if(['versions', 'other'].includes(val)) {return false;}
+        return true;
+    })
 
     useEffect(() => {
         if(loading || !localStorage) {
@@ -29,7 +38,7 @@ const PokeCard = ({ selectedpokemon }) => {
                 const suffix = "pokemon/" + getPokedexNumber(selectedpokemon);
                 const finalUrl = baseUrl + suffix;
                 const res = await fetch(finalUrl);
-                const pokemonData = res.json();
+                const pokemonData = await res.json();
 
                 setData(pokemonData);
                 console.log(pokemonData);
@@ -49,7 +58,7 @@ const PokeCard = ({ selectedpokemon }) => {
         
     }, [selectedpokemon]);
 
-    if(loading) {
+    if(loading || !data) {
         return (
             <div>Loading...</div>
         )
@@ -59,9 +68,57 @@ const PokeCard = ({ selectedpokemon }) => {
         <div className="poke-card">
             <div>
                 <h4>#{getFullPokedexNumber(selectedpokemon)}</h4>
-                <h2></h2>
+                <h2>{name}</h2>
+            </div>
+            <div className="type-container">
+                {
+                    types.map((typeObj, typeIndx) => {
+                        return (
+                            <TypeCard key={typeIndx} type={typeObj?.type?.name} />
+                        )
+                    } )
+                }
+            </div>
+            <img className="default-img" src={"/pokemon/" + getFullPokedexNumber(selectedpokemon) + ".png"} alt={name} />
+            
+            <div className="img-container">
+                {
+                    imgList.map((spriteUrl, spriteIndx) => {
+                        const imgUrl = sprites[spriteUrl];
+                        return (
+                            <img key={spriteIndx} src={imgUrl} alt={`${name}-img-${spriteUrl}`} />
+                        )
+                    })
+                }
             </div>
 
+            <h3>Stats</h3>
+            <div className="stats-card">
+                {
+                    stats.map((statObj, statIndx) => {
+                        const {base_stat, stat} = statObj;
+
+                        return (
+                            <div className="stat-item" key={statIndx}>
+                                <p>{stat?.name.replaceAll('-', ' ')}</p>
+                                <h4>{base_stat}</h4>
+                            </div>
+                        )
+                    })
+                }
+            </div>
+            <h3>Moves</h3>
+            <div className="pokemon-move-grid">
+                {
+                    moves.map((moveObj, moveIndx) => {
+                        return (
+                            <button className="button-card pokemon-move" key={moveIndx} onClick={() => {}}>
+                                <p>{moveObj?.move?.name.replaceAll('-', ' ')}</p>
+                            </button>
+                        )
+                    })
+                }
+            </div>
         </div>
     );
 };
