@@ -604,7 +604,6 @@ details[open] summary {
 .button-card {
     background-color: var(--background-muted);
     color: var(--color-primary);
-    padding: 1rem;
     border-radius: 0.5rem;
 }
 
