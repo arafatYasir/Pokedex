@@ -463,7 +463,7 @@ input,
 textarea,
 select {
     font-size: 1em;
-    background-color: var(--background-muted);
+    background-color: var(--background-primary);
     border: 1px solid var(--border-secondary);
     color: var(--color-primary);
     padding: 0.5rem 0.75rem;
@@ -472,6 +472,10 @@ select {
     /* max-width: fit-content; */
     outline: none;
     appearance: none;
+}
+
+input::placeholder {
+    color: #8f8f8f;
 }
 
 input:disabled {
